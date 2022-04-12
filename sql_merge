@@ -1,0 +1,28 @@
+merge into TB_FM_CDGRP
+	using DUAL on (CD_ID = :Form5.CD_ID)
+	 when MATCHED then
+	 update set 
+	            CD_ID_NM = :Form5.CD_ID_NM,
+	            CD_ID_DESC = :Form5.CD_ID_DESC,
+	            UYN = :Form5.UYN,
+	            MOD_DTM = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+	            MODMN_ENO = 'cms000'
+	 when not MATCHED then
+	     insert (CD_ID,
+	             CD_DSC,
+	             UYN,
+	             CD_ID_NM,
+	             CD_ID_DESC,
+	             REG_DTM,
+	             REGMN_ENO,
+	             MOD_DTM,
+	             MODMN_ENO)
+	     values (:Form5.CD_ID,
+	             null,
+	             :Form5.UYN,
+	             :Form5.CD_ID_NM,
+	             :Form5.CD_ID_DESC,
+	             TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+	             'cms000',
+	             TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+	             'cms000');
