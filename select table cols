@@ -23,5 +23,7 @@ SELECT A.TABLE_NAME
 
 
 
-SELECT 'SELECT ''' || table_name || ''' AS table_name, COUNT(*) AS row_count FROM ' || table_name || ' UNION ALL'
-FROM user_tables;
+SELECT 'SELECT ''' || TABLE_NAME || ''' AS TABLE_NAME, COUNT(*) AS CNT FROM ' || TABLE_NAME || ' UNION ALL'
+  FROM USER_TABLES
+ ORDER BY TABLE_NAME
+;
